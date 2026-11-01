@@ -10,10 +10,10 @@ inputs:
     default: 'false'
   server:
     description: "Forgejo server URL where sccache packages are stored"
-    default: 'https://git.tomfos.tr'
+    default: 'https://git.cisnt.uk'
   owner:
     description: "Owner/organisation name where sccache packages are stored"
-    default: 'tom'
+    default: 'actions'
 runs:
   using: "node20"
   main: "dist/setup/index.js"
