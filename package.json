@@ -7,8 +7,8 @@
     "node": ">=16"
   },
   "scripts": {
-    "build-dist": "ncc build lib/setup.js -m -o dist/setup/ && ncc build lib/show_stats.js -m -o dist/show_stats",
-    "build": "prettier --write **/*.ts && tsc && npm run build-dist",
+    "build-dist": "tsc && ncc build lib/setup.js -m -o dist/setup/ && ncc build lib/show_stats.js -m -o dist/show_stats",
+    "build": "prettier --write **/*.ts && npm run build-dist",
     "format": "prettier --write **/*.ts",
     "format-check": "prettier --check **/*.ts",
     "lint": "eslint **/*.ts --cache",

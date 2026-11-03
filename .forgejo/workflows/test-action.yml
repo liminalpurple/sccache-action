@@ -25,13 +25,10 @@ jobs:
       - name: Check formatting
         run: npm run format-check
 
-      - name: Compile
-        run: npx tsc
-
       - name: Test
         run: npm test
 
-      - name: Bundle and compare with dist/
+      - name: Compile, bundle and compare with dist/
         run: |
           npm run build-dist
           if ! git diff --quiet -- dist/; then
