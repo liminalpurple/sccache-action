@@ -8,7 +8,40 @@ on:
   workflow_dispatch:
 
 jobs:
+  # Workflows run the committed dist/, so dependency updates only take effect
+  # once it's rebuilt. This proves the action still compiles, bundles and
+  # tests, and that dist/ is exactly what the sources produce.
+  build:
+    runs-on: ubuntu-latest
+    container:
+      image: node:24
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Install dependencies
+        run: npm ci --no-audit --no-fund
+
+      - name: Check formatting
+        run: npm run format-check
+
+      - name: Compile
+        run: npx tsc
+
+      - name: Test
+        run: npm test
+
+      - name: Bundle and compare with dist/
+        run: |
+          npm run build-dist
+          if ! git diff --quiet -- dist/; then
+            echo "dist/ doesn't match a fresh build: run npm run build-dist and commit it"
+            git status --short -- dist/
+            exit 1
+          fi
+
   test-action:
+    needs: [build]
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
