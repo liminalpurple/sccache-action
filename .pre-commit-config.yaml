@@ -21,6 +21,7 @@ repos:
       - id: check-yaml
       - id: destroyed-symlinks
       - id: end-of-file-fixer
+        exclude: ^dist/
       - id: fix-byte-order-marker
       - id: mixed-line-ending
       - id: trailing-whitespace
