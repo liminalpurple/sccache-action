@@ -53,14 +53,14 @@ repos:
 
   # Markdown
   - repo: https://github.com/DavidAnson/markdownlint-cli2
-    rev: v0.18.1
+    rev: v0.24.0
     hooks:
       - id: markdownlint-cli2
         args: ["--fix"]
 
   # Conventional commits
   - repo: https://github.com/compilerla/conventional-pre-commit
-    rev: v4.2.0
+    rev: v4.5.0
     hooks:
       - id: conventional-pre-commit
         stages: [commit-msg]
