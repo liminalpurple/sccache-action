@@ -2,14 +2,36 @@
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "packageRules": [
     {
+      "description": "Workflows run the committed dist/, so every update rebuilds it (postUpgradeTasks) and CI checks it matches a fresh build",
+      "matchPackageNames": [
+        "*"
+      ],
+      "postUpgradeTasks": {
+        "commands": [
+          "npm ci --no-audit --no-fund",
+          "npm run build-dist"
+        ],
+        "fileFilters": [
+          "dist/**"
+        ],
+        "executionMode": "branch"
+      }
+    },
+    {
       "description": "@actions/core 3 and @actions/tool-cache 4 onwards are ESM-only, and this action compiles to CommonJS for ncc, so the toolkit's majors wait for a deliberate move to ESM",
-      "matchPackageNames": ["@actions/**"],
-      "matchUpdateTypes": ["major"],
+      "matchPackageNames": [
+        "@actions/**"
+      ],
+      "matchUpdateTypes": [
+        "major"
+      ],
       "enabled": false
     },
     {
       "description": "typescript-eslint 8 supports TypeScript below 6.1, so TypeScript 7 waits until it does",
-      "matchPackageNames": ["typescript"],
+      "matchPackageNames": [
+        "typescript"
+      ],
       "allowedVersions": "<6.1"
     }
   ]
