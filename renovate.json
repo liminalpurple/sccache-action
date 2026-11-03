@@ -1,0 +1,16 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "packageRules": [
+    {
+      "description": "@actions/core 3 and @actions/tool-cache 4 onwards are ESM-only, and this action compiles to CommonJS for ncc, so the toolkit's majors wait for a deliberate move to ESM",
+      "matchPackageNames": ["@actions/**"],
+      "matchUpdateTypes": ["major"],
+      "enabled": false
+    },
+    {
+      "description": "typescript-eslint 8 supports TypeScript below 6.1, so TypeScript 7 waits until it does",
+      "matchPackageNames": ["typescript"],
+      "allowedVersions": "<6.1"
+    }
+  ]
+}
